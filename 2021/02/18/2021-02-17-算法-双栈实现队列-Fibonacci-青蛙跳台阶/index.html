@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="双栈实现队列123456789101112131415161718192021222324252627282930313233343536&#x2F;** * 用两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead * ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。(若队列中没有元素，deleteHead 操作返回 -1 ) *&#x2F;public cl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021&#x2F;02&#x2F;17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶">
+<meta property="og:url" content="http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/index.html">
+<meta property="og:site_name" content="brlink">
+<meta property="og:description" content="双栈实现队列123456789101112131415161718192021222324252627282930313233343536&#x2F;** * 用两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead * ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。(若队列中没有元素，deleteHead 操作返回 -1 ) *&#x2F;public cl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-18T17:39:59.000Z">
+<meta property="article:modified_time" content="2021-02-18T17:43:06.000Z">
+<meta property="article:author" content="brlink">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="剑指offer">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/02/21/2021-02-21-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/02/17/2021-02-16-%E7%AE%97%E6%B3%95-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC-%E5%8F%8D%E5%90%91%E8%BE%93%E5%87%BA%E9%93%BE%E8%A1%A8-%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&text=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&is_video=false&description=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶&body=Check out this article: http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&name=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&t=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97"><span class="toc-number">1.</span> <span class="toc-text">双栈实现队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fibonacci"><span class="toc-number">2.</span> <span class="toc-text">Fibonacci</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6"><span class="toc-number">3.</span> <span class="toc-text">青蛙跳台阶</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">brlink</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-18T17:39:59.000Z" itemprop="datePublished">2021-02-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%89%91%E6%8C%87offer/" rel="tag">剑指offer</a>, <a class="tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="双栈实现队列"><a href="#双栈实现队列" class="headerlink" title="双栈实现队列"></a>双栈实现队列</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead</span></span><br><span class="line"><span class="comment"> * ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。(若队列中没有元素，deleteHead 操作返回 -1 )</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Stack&lt;Integer&gt; stack01;</span><br><span class="line">    Stack&lt;Integer&gt; stack02;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// initial 2 stacks, 01 for in, 02 for out</span></span><br><span class="line">        stack01 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack02 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">appendTail</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// item append in 1st store in stack01</span></span><br><span class="line">        stack01.push(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteHead</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// if stack02 no item, 2 situation</span></span><br><span class="line">        <span class="keyword">if</span> (stack02.isEmpty())</span><br><span class="line">            <span class="comment">// if no item in stack01 too, return -1</span></span><br><span class="line">            <span class="comment">// else pop stack 01 to stack 02</span></span><br><span class="line">            <span class="keyword">if</span> (stack01.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                stack02.push(stack01.pop());</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="comment">//return stack02 pop value</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> stack02.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Fibonacci"><a href="#Fibonacci" class="headerlink" title="Fibonacci"></a>Fibonacci</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Fibonacci</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fibonacci</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">Solution</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// first 2 numbers no need to compute</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// initial a new array</span></span><br><span class="line">        <span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        array[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        array[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// form a Fibonacci array length = n + 1</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            array[i] = array[i - <span class="number">1</span>] + array[i - <span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> array[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="青蛙跳台阶"><a href="#青蛙跳台阶" class="headerlink" title="青蛙跳台阶"></a>青蛙跳台阶</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。 </span></span><br><span class="line"><span class="comment"> * 分类讨论： 若当前选择跳 1，则后面剩余台阶数的选择为 f(n-1); </span></span><br><span class="line"><span class="comment"> * 同理当前选择跳 2，则后面选择为 f(n-2) </span></span><br><span class="line"><span class="comment"> * 因此此问题为 Fibonacci 的变种</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Numways</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">solution</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// if n &lt; 2, directly return value from array</span></span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// if n &gt;= 2</span></span><br><span class="line">        <span class="comment">// initial 2 value, 1 for previous, 1 for after</span></span><br><span class="line">        <span class="comment">// result come from sum 2 value before the index n</span></span><br><span class="line">        <span class="keyword">int</span> long_pre = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> long_aft = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// once get the result, result become the new after one</span></span><br><span class="line">        <span class="comment">// and the previous after one, become the new previous one</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;           </span><br><span class="line">            long_pre = long_aft;</span><br><span class="line">            long_aft = sum;</span><br><span class="line">            sum = (long_pre + long_aft) % <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97"><span class="toc-number">1.</span> <span class="toc-text">双栈实现队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fibonacci"><span class="toc-number">2.</span> <span class="toc-text">Fibonacci</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6"><span class="toc-number">3.</span> <span class="toc-text">青蛙跳台阶</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&text=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&is_video=false&description=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶&body=Check out this article: http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&title=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&name=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://brlink.github.io/2021/02/18/2021-02-17-%E7%AE%97%E6%B3%95-%E5%8F%8C%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97-Fibonacci-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6/&t=2021/02/17 算法: 双栈实现队列; Fibonacci; 青蛙跳台阶"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    brlink
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

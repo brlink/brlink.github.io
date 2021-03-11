@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="算法介绍算法的定义算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有限序列，并且每条指令表示一个或者多个操作。 算法的特性输入输出算法有 0 个 或 多个 输入； 算法至少有 一个 或 多个 输出。 有穷性指算法在执行有限的步骤后自动结束，不会无限循环，且每一步骤在可接受的时间完成。 确定性算法每一步骤都有明确的含义，不会具有二义性。 可行性算法每一步都是可行的，即，每一步都能够通过执行有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021&#x2F;02&#x2F;24 数据结构: 算法介绍">
+<meta property="og:url" content="http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="brlink">
+<meta property="og:description" content="算法介绍算法的定义算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有限序列，并且每条指令表示一个或者多个操作。 算法的特性输入输出算法有 0 个 或 多个 输入； 算法至少有 一个 或 多个 输出。 有穷性指算法在执行有限的步骤后自动结束，不会无限循环，且每一步骤在可接受的时间完成。 确定性算法每一步骤都有明确的含义，不会具有二义性。 可行性算法每一步都是可行的，即，每一步都能够通过执行有">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-24T21:57:57.000Z">
+<meta property="article:modified_time" content="2021-02-26T00:14:04.000Z">
+<meta property="article:author" content="brlink">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>2021/02/24 数据结构: 算法介绍</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/02/27/hello-world/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/02/21/2021-02-21-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&text=2021/02/24 数据结构: 算法介绍"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&is_video=false&description=2021/02/24 数据结构: 算法介绍"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2021/02/24 数据结构: 算法介绍&body=Check out this article: http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&name=2021/02/24 数据结构: 算法介绍&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&t=2021/02/24 数据结构: 算法介绍"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">算法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">算法的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">算法的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text">输入输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E7%A9%B7%E6%80%A7"><span class="toc-number">1.2.2.</span> <span class="toc-text">有穷性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E6%80%A7"><span class="toc-number">1.2.3.</span> <span class="toc-text">确定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7"><span class="toc-number">1.2.4.</span> <span class="toc-text">可行性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%A6%81%E6%B1%82"><span class="toc-number">1.3.</span> <span class="toc-text">算法设计的要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%AF%BB%E6%80%A7"><span class="toc-number">1.3.2.</span> <span class="toc-text">可读性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%A5%E5%A3%AE%E6%80%A7"><span class="toc-number">1.3.3.</span> <span class="toc-text">健壮性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%95%88%E7%8E%87%E9%AB%98%E5%92%8C%E5%AD%98%E5%82%A8%E9%87%8F%E4%BD%8E"><span class="toc-number">1.3.4.</span> <span class="toc-text">时间效率高和存储量低</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">算法效率的度量方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%90%8E%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">1.4.1.</span> <span class="toc-text">事后统计方法（不推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%89%8D%E5%88%86%E6%9E%90%E4%BC%B0%E7%AE%97%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">事前分析估算方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E6%B8%90%E8%BF%9B%E5%A2%9E%E9%95%BF"><span class="toc-number">1.4.3.</span> <span class="toc-text">函数的渐进增长</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.5.</span> <span class="toc-text">算法时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%AE%9A%E4%B9%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">算法时间复杂度定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E5%AF%BC%E5%A4%A7-O-%E9%98%B6%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.2.</span> <span class="toc-text">推导大 O 阶方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E6%95%B0%E9%98%B6"><span class="toc-number">1.5.3.</span> <span class="toc-text">常数阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E9%98%B6"><span class="toc-number">1.5.4.</span> <span class="toc-text">线性阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%95%B0%E9%98%B6"><span class="toc-number">1.5.5.</span> <span class="toc-text">对数阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E9%98%B6"><span class="toc-number">1.5.6.</span> <span class="toc-text">平方阶</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.6.</span> <span class="toc-text">常见的时间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%9D%8F%E6%83%85%E5%86%B5%E5%92%8C%E5%B9%B3%E5%9D%87%E6%83%85%E5%86%B5"><span class="toc-number">1.7.</span> <span class="toc-text">最坏情况和平均情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.8.</span> <span class="toc-text">算法空间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.9.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        2021/02/24 数据结构: 算法介绍
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">brlink</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-24T21:57:57.000Z" itemprop="datePublished">2021-02-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h1><h2 id="算法的定义"><a href="#算法的定义" class="headerlink" title="算法的定义"></a>算法的定义</h2><p>算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有限序列，并且每条指令表示一个或者多个操作。</p>
+<h2 id="算法的特性"><a href="#算法的特性" class="headerlink" title="算法的特性"></a>算法的特性</h2><h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><p>算法有 <strong>0 个</strong> 或 <strong>多个</strong> 输入；</p>
+<p>算法至少有 <strong>一个</strong> 或 <strong>多个</strong> 输出。</p>
+<h3 id="有穷性"><a href="#有穷性" class="headerlink" title="有穷性"></a>有穷性</h3><p>指算法在执行有限的步骤后自动结束，<em>不会无限循环</em>，且每一步骤<em>在可接受的时间完成</em>。</p>
+<h3 id="确定性"><a href="#确定性" class="headerlink" title="确定性"></a>确定性</h3><p>算法每一步骤都有明确的含义，不会具有二义性。</p>
+<h3 id="可行性"><a href="#可行性" class="headerlink" title="可行性"></a>可行性</h3><p>算法每一步都是可行的，即，每一步都能够通过执行有限次数完成。</p>
+<h2 id="算法设计的要求"><a href="#算法设计的要求" class="headerlink" title="算法设计的要求"></a>算法设计的要求</h2><p>“算法的特性”是指：一旦被认为是算法，就具备这些特性；</p>
+<p>“算法设计的要求”是指：好的算法应该具备的特点。</p>
+<h3 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h3><p>算法正确性是指算法至少有输入输出和无二义性，能正确反应需求，得到正确答案。</p>
+<p>算法的“正确”分为 4 个层次：</p>
+<ol>
+<li>算法没有语法错误</li>
+<li>算法对于合法的输入能产出满足要求的输出</li>
+<li>算法对于非法的输入能得到满足规格说明的结果</li>
+<li>算法对于精心选择的刁难的测试数据都有满足要求的输出</li>
+</ol>
+<p>一般把 3 作为算法是否正确的基本标准。</p>
+<h3 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h3><p>算法设计的另一目的是方便阅读理解和交流。</p>
+<h3 id="健壮性"><a href="#健壮性" class="headerlink" title="健壮性"></a>健壮性</h3><p>输入数据不合法也能做出相关处理，不是产生异常或莫名其妙的结果。</p>
+<h3 id="时间效率高和存储量低"><a href="#时间效率高和存储量低" class="headerlink" title="时间效率高和存储量低"></a>时间效率高和存储量低</h3><p>设计算法应该尽量满足时间效率高和存储量低的需求。</p>
+<h2 id="算法效率的度量方法"><a href="#算法效率的度量方法" class="headerlink" title="算法效率的度量方法"></a>算法效率的度量方法</h2><h3 id="事后统计方法（不推荐）"><a href="#事后统计方法（不推荐）" class="headerlink" title="事后统计方法（不推荐）"></a>事后统计方法（不推荐）</h3><p>定义：通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较，确定算法效率的高低。</p>
+<p>缺陷：</p>
+<ol>
+<li>必须编制好程序才能测试，浪费成本。</li>
+<li>依赖软硬件等环境因素，会产生误差。</li>
+<li>与测试数据的规模有很大关系。</li>
+</ol>
+<h3 id="事前分析估算方法"><a href="#事前分析估算方法" class="headerlink" title="事前分析估算方法"></a>事前分析估算方法</h3><p>定义：在计算机程序编制前，依据统计方法对算法进行估算。</p>
+<p>时间效率取决于：</p>
+<ol>
+<li>算法采取的策略和方法</li>
+<li>编译的代码质量</li>
+<li>问题的输入规模</li>
+<li>机器执行指令的速度</li>
+</ol>
+<p>1 是根本，2 取决于软件，4 取决于硬件。因此，程序运行时间依赖于<strong>算法的好坏</strong>和<strong>问题输入的规模</strong>。</p>
+<p>如：计算 1 到 100 所有整数之和。</p>
+<p>算法 1 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">100</span>;</span><br><span class="line"><span class="comment">// n + 1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)&#123;</span><br><span class="line">    <span class="comment">// n</span></span><br><span class="line">    sum += i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line">System.out.println(sum);</span><br></pre></td></tr></table></figure>
+
+<p>算法 2 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">100</span>;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line">sum = (<span class="number">1</span> + n) * n / <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line">System.out.println(sum);</span><br></pre></td></tr></table></figure>
+
+<p>算法 1 执行了 2n+4 次；算法 2 执行了 4 次。</p>
+<p>计算对运行时间有消耗的基本操作的次数可以估计时间效率。</p>
+<p>不计循环索引的递增和循环终止条件，最终，分析程序的运行时间最重要的是把程序看成是独立于程序设计语言的算法或一系列步骤。</p>
+<h3 id="函数的渐进增长"><a href="#函数的渐进增长" class="headerlink" title="函数的渐进增长"></a>函数的渐进增长</h3><p>算法 A：4n + 8</p>
+<p>算法 B：n<sup>2</sup></p>
+<p>给定的两个函数 f(n) 和 g(n)，如果存在一个整数 N, 使得对于所有的 n &gt; N，f(n) 总是比 g(n) 大，那么，我们说 f(n) 的渐进增长快于 g（n）</p>
+<p>我们发现，与最高次项相乘的常数并不重要；</p>
+<p>最高此项的指数大的，随着 n 增长，结果也会增长得特别快；</p>
+<p>判断一个算法的效率时，函数中的常数和其他次要项可以忽略，而更应该关注主项（最高阶项）的阶数。</p>
+<h2 id="算法时间复杂度"><a href="#算法时间复杂度" class="headerlink" title="算法时间复杂度"></a>算法时间复杂度</h2><h3 id="算法时间复杂度定义"><a href="#算法时间复杂度定义" class="headerlink" title="算法时间复杂度定义"></a>算法时间复杂度定义</h3><p>语句总的执行次数 T(n) 是关于问题规模 n 的函数，进而分析 T(n) 随 n 的变化情况确定 T(n) 的数量级。算法的时间复杂度，也就是算法的时间量度，记作：T(n) = O(f(n))</p>
+<p>O(1) 叫常数阶，O(n)叫线性阶，O(n<sup>2</sup>) 叫平方阶</p>
+<h3 id="推导大-O-阶方法"><a href="#推导大-O-阶方法" class="headerlink" title="推导大 O 阶方法"></a>推导大 O 阶方法</h3><ol>
+<li>用常数 1 取代运行时间中的所有加法常数。</li>
+<li>在修改后的运行次数函数中，只保留最高阶项。</li>
+<li>如果最高阶项存在且不为 1，去除与这个项相乘的常数。</li>
+</ol>
+<p>得到的结果就是大 O 阶。</p>
+<h3 id="常数阶"><a href="#常数阶" class="headerlink" title="常数阶"></a>常数阶</h3><p>无论常数是多少，都记做 O(1)。</p>
+<p>对于分支结构，无论真假，执行的次数都是恒定的，单纯的分支结构的时间复杂度也是 O(1)。</p>
+<h3 id="线性阶"><a href="#线性阶" class="headerlink" title="线性阶"></a>线性阶</h3><p>分析算法的复杂度，关键是分析循环结构的运行情况。</p>
+<h3 id="对数阶"><a href="#对数阶" class="headerlink" title="对数阶"></a>对数阶</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (count &lt; n) &#123;</span><br><span class="line">    count *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每次 count × 2 后，离 n 更近了一步，2<sup>x</sup> = n，得到 x = log<sub>2</sub>n，因此时间复杂度为 O(logn)。</p>
+<h3 id="平方阶"><a href="#平方阶" class="headerlink" title="平方阶"></a>平方阶</h3><p>循环的时间复杂度等于循环体的时间复杂度乘以该循环运行的次数。</p>
+<p>大 O 推导的理解不难，难的是数列的运算，需要<strong>数学知识</strong>能力。</p>
+<h2 id="常见的时间复杂度"><a href="#常见的时间复杂度" class="headerlink" title="常见的时间复杂度"></a>常见的时间复杂度</h2><p><strong>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n<sup>2</sup>) &lt; O(n<sup>3</sup>) &lt; O(2<sup>n</sup>)</strong> &lt; O(n!) &lt; O(n<sup>n</sup>)</p>
+<h2 id="最坏情况和平均情况"><a href="#最坏情况和平均情况" class="headerlink" title="最坏情况和平均情况"></a>最坏情况和平均情况</h2><p>最坏情况运行时间是一种保证，那就是运行时间不会再坏了。除非特别指定，我们提到的运行时间都是最坏情况的运行时间。</p>
+<p>平均运行时间是所有情况中最有意义的，因为它是期望的运行时间。</p>
+<h2 id="算法空间复杂度"><a href="#算法空间复杂度" class="headerlink" title="算法空间复杂度"></a>算法空间复杂度</h2><p>算法的空间复杂度通过计算算法所需的存储空间实现：S(N) = O(f(n))</p>
+<p>有时候以空间换时间的方法可以减少运行时间。</p>
+<p>如判断年份是否为闰年，可以实现设定一个数组，数组索引和年份对应，数组值为 0 或 1，闰年为 1，这样就可以减少时间复杂度。但是同时这也增加了内存占用量。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>《大话数据结构》 第 2 卷</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">算法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">算法的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">算法的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text">输入输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E7%A9%B7%E6%80%A7"><span class="toc-number">1.2.2.</span> <span class="toc-text">有穷性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E6%80%A7"><span class="toc-number">1.2.3.</span> <span class="toc-text">确定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7"><span class="toc-number">1.2.4.</span> <span class="toc-text">可行性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%A6%81%E6%B1%82"><span class="toc-number">1.3.</span> <span class="toc-text">算法设计的要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%AF%BB%E6%80%A7"><span class="toc-number">1.3.2.</span> <span class="toc-text">可读性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%A5%E5%A3%AE%E6%80%A7"><span class="toc-number">1.3.3.</span> <span class="toc-text">健壮性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%95%88%E7%8E%87%E9%AB%98%E5%92%8C%E5%AD%98%E5%82%A8%E9%87%8F%E4%BD%8E"><span class="toc-number">1.3.4.</span> <span class="toc-text">时间效率高和存储量低</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E7%9A%84%E5%BA%A6%E9%87%8F%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">算法效率的度量方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%90%8E%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">1.4.1.</span> <span class="toc-text">事后统计方法（不推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%89%8D%E5%88%86%E6%9E%90%E4%BC%B0%E7%AE%97%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">事前分析估算方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E6%B8%90%E8%BF%9B%E5%A2%9E%E9%95%BF"><span class="toc-number">1.4.3.</span> <span class="toc-text">函数的渐进增长</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.5.</span> <span class="toc-text">算法时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%AE%9A%E4%B9%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">算法时间复杂度定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E5%AF%BC%E5%A4%A7-O-%E9%98%B6%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.2.</span> <span class="toc-text">推导大 O 阶方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E6%95%B0%E9%98%B6"><span class="toc-number">1.5.3.</span> <span class="toc-text">常数阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E9%98%B6"><span class="toc-number">1.5.4.</span> <span class="toc-text">线性阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%95%B0%E9%98%B6"><span class="toc-number">1.5.5.</span> <span class="toc-text">对数阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E9%98%B6"><span class="toc-number">1.5.6.</span> <span class="toc-text">平方阶</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.6.</span> <span class="toc-text">常见的时间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%9D%8F%E6%83%85%E5%86%B5%E5%92%8C%E5%B9%B3%E5%9D%87%E6%83%85%E5%86%B5"><span class="toc-number">1.7.</span> <span class="toc-text">最坏情况和平均情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.8.</span> <span class="toc-text">算法空间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.9.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&text=2021/02/24 数据结构: 算法介绍"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&is_video=false&description=2021/02/24 数据结构: 算法介绍"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2021/02/24 数据结构: 算法介绍&body=Check out this article: http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&title=2021/02/24 数据结构: 算法介绍"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&name=2021/02/24 数据结构: 算法介绍&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://brlink.github.io/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/&t=2021/02/24 数据结构: 算法介绍"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    brlink
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
