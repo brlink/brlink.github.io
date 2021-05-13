@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="顺序表基本操作的实现线性表的初始化（参数用引用）1234567Status InitList_Sq(SqList &amp;L)&amp;#123;	L.elem &#x3D; new ElemType[MAXSIZE];	&#x2F;&#x2F;为顺序表分配空间	if(!L.elem)		exit(OVERFLOW);				&#x2F;&#x2F;存储分配失败	L.length &#x3D; 0;					&#x2F;&#x2F;空表长度为0	return OK;&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性表的顺序表示和实现">
+<meta property="og:url" content="http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="brlink">
+<meta property="og:description" content="顺序表基本操作的实现线性表的初始化（参数用引用）1234567Status InitList_Sq(SqList &amp;L)&amp;#123;	L.elem &#x3D; new ElemType[MAXSIZE];	&#x2F;&#x2F;为顺序表分配空间	if(!L.elem)		exit(OVERFLOW);				&#x2F;&#x2F;存储分配失败	L.length &#x3D; 0;					&#x2F;&#x2F;空表长度为0	return OK;&amp;#125;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-13T16:39:00.000Z">
+<meta property="article:modified_time" content="2021-05-13T22:52:03.632Z">
+<meta property="article:author" content="brlink">
+<meta property="article:tag" content="数据结构与算法">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>线性表的顺序表示和实现</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/05/13/1.1.1%20%E6%A6%82%E5%BF%B5%20%E7%BB%84%E6%88%90%20%E5%8A%9F%E8%83%BD%20%E5%88%86%E7%B1%BB/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/02/24/2021-02-24-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&text=线性表的顺序表示和实现"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&is_video=false&description=线性表的顺序表示和实现"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=线性表的顺序表示和实现&body=Check out this article: http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&name=线性表的顺序表示和实现&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&t=线性表的顺序表示和实现"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">顺序表基本操作的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E5%8F%82%E6%95%B0%E7%94%A8%E5%BC%95%E7%94%A8%EF%BC%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">线性表的初始化（参数用引用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%80%E6%AF%81%E7%BA%BF%E6%80%A7%E8%A1%A8-L"><span class="toc-number">1.0.2.</span> <span class="toc-text">销毁线性表 L</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%85%E7%A9%BA%E7%BA%BF%E6%80%A7%E8%A1%A8-L"><span class="toc-number">1.0.3.</span> <span class="toc-text">清空线性表 L</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E7%BA%BF%E6%80%A7%E8%A1%A8-L-%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="toc-number">1.0.4.</span> <span class="toc-text">求线性表 L 的长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E8%A1%A8-L-%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BA"><span class="toc-number">1.0.5.</span> <span class="toc-text">判断线性表 L 是否为空</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E5%8F%96%E5%80%BC"><span class="toc-number">1.0.6.</span> <span class="toc-text">顺序表的取值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">顺序表中的查找操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">2.0.1.</span> <span class="toc-text">算法分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">顺序表的插入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="toc-number">3.0.1.</span> <span class="toc-text">算法思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">算法分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-number">4.</span> <span class="toc-text">顺序表的删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">算法分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">5.0.1.</span> <span class="toc-text">顺序表的特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">5.0.2.</span> <span class="toc-text">操作算法分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">5.0.3.</span> <span class="toc-text">顺序表优缺点</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        线性表的顺序表示和实现
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">brlink</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-05-13T16:39:00.000Z" itemprop="datePublished">2021-05-13</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="顺序表基本操作的实现"><a href="#顺序表基本操作的实现" class="headerlink" title="顺序表基本操作的实现"></a>顺序表基本操作的实现</h2><h4 id="线性表的初始化（参数用引用）"><a href="#线性表的初始化（参数用引用）" class="headerlink" title="线性表的初始化（参数用引用）"></a>线性表的初始化（参数用引用）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InitList_Sq</span><span class="params">(SqList &amp;L)</span></span>&#123;</span><br><span class="line">	L.elem = <span class="keyword">new</span> ElemType[MAXSIZE];	<span class="comment">//为顺序表分配空间</span></span><br><span class="line">	<span class="keyword">if</span>(!L.elem)</span><br><span class="line">		<span class="built_in">exit</span>(OVERFLOW);				<span class="comment">//存储分配失败</span></span><br><span class="line">	L.length = <span class="number">0</span>;					<span class="comment">//空表长度为0</span></span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="销毁线性表-L"><a href="#销毁线性表-L" class="headerlink" title="销毁线性表 L"></a>销毁线性表 L</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DestroyList</span><span class="params">(SqList &amp;L)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L.elem)</span><br><span class="line">		<span class="keyword">delete</span> L.elem;				<span class="comment">//释放存储空间</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="清空线性表-L"><a href="#清空线性表-L" class="headerlink" title="清空线性表 L"></a>清空线性表 L</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ClearList</span><span class="params">(SqList &amp;L)</span></span>&#123;</span><br><span class="line">	L.length = <span class="number">0</span>;					<span class="comment">//将线性表程度设为0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="求线性表-L-的长度"><a href="#求线性表-L-的长度" class="headerlink" title="求线性表 L 的长度"></a>求线性表 L 的长度</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetLength</span><span class="params">(SqList &amp;L)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> L.length; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断线性表-L-是否为空"><a href="#判断线性表-L-是否为空" class="headerlink" title="判断线性表 L 是否为空"></a>判断线性表 L 是否为空</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isEmpty</span><span class="params">(SqList &amp;L)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L.length == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="顺序表的取值"><a href="#顺序表的取值" class="headerlink" title="顺序表的取值"></a>顺序表的取值</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetElem</span><span class="params">(SqList L, <span class="keyword">int</span> i, ElemType &amp;e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; L.length)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	e = L.elem[i - <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="顺序表中的查找操作"><a href="#顺序表中的查找操作" class="headerlink" title="顺序表中的查找操作"></a>顺序表中的查找操作</h2><ul>
+<li>在线性表 L 中查找与特定值 e 相同的数据元素的位置</li>
+<li>从表的一端开始逐个比对，找到返回序号，没找到，返回 0。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LocateElem</span><span class="params">(SqList L, ElemType e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; L.length; i++)</span><br><span class="line">		<span class="keyword">if</span>(L.elem[i] == e)</span><br><span class="line">			<span class="keyword">return</span> i + <span class="number">1</span>;			<span class="comment">//查找成功，返回序号</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;						<span class="comment">//查找失败，返回0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h4><p><strong>基本操作</strong>：和==给定值==比较</p>
+<p><strong>平均查找长度</strong> ==ASL== (Average Search Length)：和给定值比较的次数的期望值叫平均查找长度。</p>
+<p>$ASL = \sum_{i = 1}^{n}P_iC_i$</p>
+<p>其中$P_i$代表第 i 个记录被查找的概率， $C_i$代表找到第 i 个记录需比较的次数。</p>
+<p>假设每个记录被查到的概率相等，都是 $\frac {1} {n}$，那么</p>
+<p>$ASL = \frac {1}{n} \cdot \frac {n(n+1)}{2} = \frac {n+1}{2}$</p>
+<p>时间效率为 $O(n)$</p>
+<h2 id="顺序表的插入"><a href="#顺序表的插入" class="headerlink" title="顺序表的插入"></a>顺序表的插入</h2><h4 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h4><ol>
+<li>判断插入位置是否合法</li>
+<li>存储空间是否已经满了，否则返回 ERROR</li>
+<li>将第 n 至第 i 位的元素依次向后移动一位，空出 i 位</li>
+<li>将新元素 e 放入 i 位</li>
+<li>表长加 1</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ListInsertSq</span><span class="params">(SqList &amp;L, <span class="keyword">int</span> i, ElemType e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; L.length + <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="keyword">if</span>(L.length == MAXSIZE)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="keyword">for</span>(j = L.length; j &gt;= i - <span class="number">1</span>; j--)</span><br><span class="line">		L.elem[j + <span class="number">1</span>] = L.elem[j];		<span class="comment">//插入位置之后的元素后移</span></span><br><span class="line">	L.elem[i<span class="number">-1</span>] = e;</span><br><span class="line">	L.length++;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是通用的算法，无论是插在首位还是中间还是最后。</p>
+<h4 id="算法分析-1"><a href="#算法分析-1" class="headerlink" title="算法分析"></a>算法分析</h4><p>时间耗费主要在移动元素的操作上。</p>
+<p>平均时间复杂度为 $\frac {n}{2}$</p>
+<p>时间复杂度为 $O(n)$</p>
+<h2 id="顺序表的删除"><a href="#顺序表的删除" class="headerlink" title="顺序表的删除"></a>顺序表的删除</h2><ol>
+<li>判断删除位置是否合法</li>
+<li>把欲删除的元素保留在 e 中</li>
+<li>把第 i+1 位到第 n 位的元素前移一位</li>
+<li>长度减一</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Sturct <span class="title">ListDeleteSq</span><span class="params">(SqList &amp;L, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; L.length)</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="keyword">for</span>(j = i; j &lt;= L.length - <span class="number">1</span>; j++)</span><br><span class="line">		L.elem[j - <span class="number">1</span>] = L.elem[j];</span><br><span class="line">	L.length--;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="算法分析-2"><a href="#算法分析-2" class="headerlink" title="算法分析"></a>算法分析</h4><p>平均时间复杂度：$\frac {n-1}{2}$</p>
+<p>时间复杂度：$O(n)$</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h4 id="顺序表的特点"><a href="#顺序表的特点" class="headerlink" title="顺序表的特点"></a>顺序表的特点</h4><ol>
+<li>逻辑结构和存储结构一致</li>
+<li>访问每个元素花费的时间相等</li>
+</ol>
+<h4 id="操作算法分析"><a href="#操作算法分析" class="headerlink" title="操作算法分析"></a>操作算法分析</h4><ul>
+<li>时间复杂度：插入查找和删除的平均时间复杂度为$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<h4 id="顺序表优缺点"><a href="#顺序表优缺点" class="headerlink" title="顺序表优缺点"></a>顺序表优缺点</h4><ul>
+<li>优点<ul>
+<li>存储密度大</li>
+<li>可以随机存取表中任一元素</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>插入删除需要移动大量元素</li>
+<li>浪费存储空间</li>
+<li>静态存储，个数不能自由扩充</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">顺序表基本操作的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E5%8F%82%E6%95%B0%E7%94%A8%E5%BC%95%E7%94%A8%EF%BC%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">线性表的初始化（参数用引用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%80%E6%AF%81%E7%BA%BF%E6%80%A7%E8%A1%A8-L"><span class="toc-number">1.0.2.</span> <span class="toc-text">销毁线性表 L</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%85%E7%A9%BA%E7%BA%BF%E6%80%A7%E8%A1%A8-L"><span class="toc-number">1.0.3.</span> <span class="toc-text">清空线性表 L</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E7%BA%BF%E6%80%A7%E8%A1%A8-L-%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="toc-number">1.0.4.</span> <span class="toc-text">求线性表 L 的长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%BA%BF%E6%80%A7%E8%A1%A8-L-%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BA"><span class="toc-number">1.0.5.</span> <span class="toc-text">判断线性表 L 是否为空</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E5%8F%96%E5%80%BC"><span class="toc-number">1.0.6.</span> <span class="toc-text">顺序表的取值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">顺序表中的查找操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">2.0.1.</span> <span class="toc-text">算法分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">顺序表的插入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="toc-number">3.0.1.</span> <span class="toc-text">算法思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">算法分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-number">4.</span> <span class="toc-text">顺序表的删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">算法分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">5.0.1.</span> <span class="toc-text">顺序表的特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">5.0.2.</span> <span class="toc-text">操作算法分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">5.0.3.</span> <span class="toc-text">顺序表优缺点</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&text=线性表的顺序表示和实现"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&is_video=false&description=线性表的顺序表示和实现"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=线性表的顺序表示和实现&body=Check out this article: http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&title=线性表的顺序表示和实现"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&name=线性表的顺序表示和实现&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://brlink.github.io/2021/05/13/W2L4%20%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0/&t=线性表的顺序表示和实现"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    brlink
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
