@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="为什么要分层发送文件前：  将数据通信的通路&#x3D;&#x3D;激活&#x3D;&#x3D; 告诉网络如何识别目的主机 发起主机要查明目的主机是否开机，连接是否正常 发起主机要知道对方管理程序是否已经做好接收准备 确保差错和意外可以解决…  怎么分层基本规则  各层之间相互独立，每层只实现相对独立的功能 每层之间界面自然清晰，交流尽量少 结构上可分割。每层用最合适的技术 下层对上层独立，上层对下层单向提供服务 整个分层促进标准化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分层结构 协议 接口 服务">
+<meta property="og:url" content="http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="brlink">
+<meta property="og:description" content="为什么要分层发送文件前：  将数据通信的通路&#x3D;&#x3D;激活&#x3D;&#x3D; 告诉网络如何识别目的主机 发起主机要查明目的主机是否开机，连接是否正常 发起主机要知道对方管理程序是否已经做好接收准备 确保差错和意外可以解决…  怎么分层基本规则  各层之间相互独立，每层只实现相对独立的功能 每层之间界面自然清晰，交流尽量少 结构上可分割。每层用最合适的技术 下层对上层独立，上层对下层单向提供服务 整个分层促进标准化">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-14T17:52:30.000Z">
+<meta property="article:modified_time" content="2021-05-14T20:52:48.660Z">
+<meta property="article:author" content="brlink">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>分层结构 协议 接口 服务</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/05/14/1.1.4%20%E6%97%B6%E5%BB%B6%20%E6%97%B6%E5%BB%B6%E5%B8%A6%E5%AE%BD%E7%A7%AF%20RTT%20%E5%88%A9%E7%94%A8%E7%8E%87/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&text=分层结构 协议 接口 服务"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&is_video=false&description=分层结构 协议 接口 服务"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=分层结构 协议 接口 服务&body=Check out this article: http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&name=分层结构 协议 接口 服务&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&t=分层结构 协议 接口 服务"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%86%E5%B1%82"><span class="toc-number">1.</span> <span class="toc-text">为什么要分层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%88%86%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">怎么分层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">认识分层结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        分层结构 协议 接口 服务
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">brlink</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-05-14T17:52:30.000Z" itemprop="datePublished">2021-05-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="为什么要分层"><a href="#为什么要分层" class="headerlink" title="为什么要分层"></a>为什么要分层</h2><p>发送文件前：</p>
+<ol>
+<li>将数据通信的通路==激活==</li>
+<li>告诉网络如何识别目的主机</li>
+<li>发起主机要查明目的主机是否开机，连接是否正常</li>
+<li>发起主机要知道对方管理程序是否已经做好接收准备</li>
+<li>确保差错和意外可以解决<br>…</li>
+</ol>
+<h2 id="怎么分层"><a href="#怎么分层" class="headerlink" title="怎么分层"></a>怎么分层</h2><p>基本规则</p>
+<ol>
+<li>各层之间相互独立，每层只实现相对独立的功能</li>
+<li>每层之间界面自然清晰，交流尽量少</li>
+<li>结构上可分割。每层用最合适的技术</li>
+<li>下层对上层独立，上层对下层单向提供服务</li>
+<li>整个分层促进标准化</li>
+</ol>
+<h2 id="认识分层结构"><a href="#认识分层结构" class="headerlink" title="认识分层结构"></a>认识分层结构</h2><ol>
+<li>实体：第 n 层的活动元素称为 n 层实体。同一层为对等实体。</li>
+<li>协议：对等实体数据交换建立的规则称为网络协议。==水平==<ul>
+<li>语法：规定传输数据的格式</li>
+<li>语义：规定索要完成的功能</li>
+<li>同步：规定各种操作的顺序</li>
+</ul>
+</li>
+<li>接口（访问服务SAP）：上层使用下层服务的入口</li>
+<li>服务：下层为相邻上岑提供的功能调用。==垂直==</li>
+</ol>
+<p>SDU 服务数据单元：完成用户所要求的功能而应传送的数据<br>PCI 协议控制信息：控制协议操作的信息<br>PDU 协议数据单元：对等层次之间传送的数据单位</p>
+<p>$SDU + PCI = PDU$ 然后 PDU 最为下一层的 SDU</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>网络体系结构从功能上描述计算机网络结构</li>
+<li>计网体系简称网络体系结构，是==分层结构==</li>
+<li>每层遵循某些==网络协议==完成本层功能</li>
+<li>计网体系结构是计网==各层及其协议==的集合</li>
+<li>n 层为 n+1 层提供服务时，不仅包含第 n 层本身的功能，还包含下层服务提供的功能</li>
+<li>相邻层间有接口，且所提供服务的具体实现细节对上层完全屏蔽</li>
+<li>体系结构抽象，实现由软硬件实现</li>
+</ul>
+<p>分层结构</p>
+<ul>
+<li>[[#为什么要分层]]</li>
+<li>[[#怎么分层]]<ul>
+<li>协议</li>
+<li>服务</li>
+<li>接口</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%86%E5%B1%82"><span class="toc-number">1.</span> <span class="toc-text">为什么要分层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%88%86%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">怎么分层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">认识分层结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&text=分层结构 协议 接口 服务"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&is_video=false&description=分层结构 协议 接口 服务"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=分层结构 协议 接口 服务&body=Check out this article: http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&title=分层结构 协议 接口 服务"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&name=分层结构 协议 接口 服务&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://brlink.github.io/2021/05/14/1.2.1%20%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84%20%E5%8D%8F%E8%AE%AE%20%E6%8E%A5%E5%8F%A3%20%E6%9C%8D%E5%8A%A1/&t=分层结构 协议 接口 服务"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    brlink
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
